@@ -1,0 +1,48 @@
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="(site?.id === 0 ? 'Create' : 'Edit') + ' Site'" nzWidth="50vw"
+          (nzOnCancel)="isVisible = false" nzOkText="Save" nzCancelText="Close" (nzOnOk)="saveSite()">
+
+  <div *ngIf="site">
+
+    <div class="w-100 mb-3">
+
+      Name:
+
+      <input nz-input [(ngModel)]="site.name" class="w-100">
+
+    </div>
+
+    <div class="w-100 mb-3">
+
+      Description:
+
+      <input nz-input [(ngModel)]="site.description" class="w-100">
+
+    </div>
+
+    <div class="w-100 mb-3">
+
+      Url:
+
+      <input nz-input [(ngModel)]="site.url" class="w-100">
+
+    </div>
+
+    <div class="w-100">
+
+      Upload Icon:
+
+      <nz-upload *ngIf="!site.s3Path" class="w-100" nzType="drag" [nzMultiple]="false" [nzAction]="getUploadPath()"
+                 (nzChange)="handleChange($event)">
+
+        <p class="ant-upload-text">Click or drag file to this area to upload</p>
+
+      </nz-upload>
+
+      <fa-icon *ngIf="site.s3Path" [icon]="check" style="color: green"></fa-icon>
+
+    </div>
+
+  </div>
+
+
+</nz-modal>
