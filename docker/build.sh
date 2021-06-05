@@ -28,4 +28,3 @@ echo "To run locally for testing:"
 echo "--------------------------------------------------------"
 echo "docker run -p 8080:80 $REPO:$TAG_HASH"
 
-service apache2 restart
