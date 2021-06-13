@@ -49,7 +49,7 @@ export class CreateEditSiteModalComponent implements OnInit, OnDestroy {
   }
 
   getUploadPath(): string {
-    return `${environment.apiUrl}/upload-site-image`;
+    return `${environment.apiUrl}/site-image`;
   }
 
   handleChange({file}): void {
