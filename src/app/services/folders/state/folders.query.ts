@@ -4,6 +4,7 @@ import { FoldersStore, FoldersState } from './folders.store';
 import {Observable} from 'rxjs';
 import {Folder} from '../../../models/folder.model';
 import {map, tap} from 'rxjs/operators';
+import {NzSelectOptionInterface} from 'ng-zorro-antd/select';
 
 @Injectable({ providedIn: 'root' })
 export class FoldersQuery extends QueryEntity<FoldersState> {
@@ -31,6 +32,15 @@ export class FoldersQuery extends QueryEntity<FoldersState> {
 
         return gridFormattedFolders;
       })
+  );
+
+  folderOptions$: Observable<NzSelectOptionInterface[]> = this.folders$.pipe(
+    map(folders => folders.map(folder => {
+      return {
+        label: folder.name,
+        value: folder.id
+      };
+    }))
   );
 
   editMode$: Observable<boolean> = this.select('editMode');

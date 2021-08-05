@@ -1,14 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {createFolder, Folder} from '../../../models/folder.model';
-import { FoldersStore } from './folders.store';
+import {FoldersStore} from './folders.store';
 import {map, tap} from 'rxjs/operators';
 import {environment} from '../../../../environments/environment';
 import {createSite, Site} from '../../../models/site.model';
 import {arrayAdd, arrayRemove, arrayUpdate} from '@datorama/akita';
 import {FoldersQuery} from './folders.query';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class FoldersService {
 
   constructor(
@@ -53,12 +53,23 @@ export class FoldersService {
     ).toPromise();
   }
 
-  async updateSite(site: Site): Promise<void> {
+  async updateSite(site: Site, oldFolderId: number): Promise<void> {
     await this.http.put<Site>(`${environment.apiUrl}/sites/${site.id}`, site).pipe(
       map(s => createSite(s)),
-      tap(s => this.foldersStore.update(site.folderId, ({sites}) => ({
-        sites: arrayUpdate(sites, s.id, s)
-      })))
+      tap(s => {
+        if (s.folderId === oldFolderId) {
+          this.foldersStore.update(site.folderId, ({sites}) => ({
+            sites: arrayUpdate(sites, s.id, s)
+          }));
+        } else {
+          this.foldersStore.update(oldFolderId, ({sites}) => ({
+            sites: arrayRemove(sites, s.id)
+          }));
+          this.foldersStore.update(s.folderId, ({sites}) => ({
+            sites: arrayAdd(sites, s)
+          }));
+        }
+      })
     ).toPromise();
   }
 

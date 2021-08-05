@@ -5,6 +5,7 @@ import {createSite, Site} from '../../../../models/site.model';
 import {FoldersService} from '../../../../services/folders/state/folders.service';
 import {environment} from '../../../../../environments/environment';
 import {faCheckCircle} from '@fortawesome/free-solid-svg-icons';
+import {FoldersQuery} from '../../../../services/folders/state/folders.query';
 
 @Component({
   selector: 'app-create-edit-site-modal',
@@ -17,11 +18,13 @@ export class CreateEditSiteModalComponent implements OnInit, OnDestroy {
   site: Site;
   isVisible = false;
   check = faCheckCircle;
+  folderId: number;
 
   private subscriptionDestroyer: Subject<void> = new Subject<void>();
 
   constructor(
-    private foldersService: FoldersService
+    private foldersService: FoldersService,
+    private foldersQuery: FoldersQuery,
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +32,7 @@ export class CreateEditSiteModalComponent implements OnInit, OnDestroy {
       takeUntil(this.subscriptionDestroyer)
     ).subscribe(site => {
       this.site = site.id === 0 ? site : createSite(site);
+      this.folderId = site.folderId;
       this.isVisible = true;
     });
   }
@@ -42,7 +46,7 @@ export class CreateEditSiteModalComponent implements OnInit, OnDestroy {
     if (this.site.id === 0) {
       await this.foldersService.createSite(this.site);
     } else {
-      await this.foldersService.updateSite(this.site);
+      await this.foldersService.updateSite(this.site, this.folderId);
     }
 
     this.isVisible = false;
@@ -57,6 +61,7 @@ export class CreateEditSiteModalComponent implements OnInit, OnDestroy {
 
     if (status === 'done') {
       this.site.s3Path = file.response.imagePath;
+
     }
   }
 

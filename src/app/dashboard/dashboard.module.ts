@@ -22,6 +22,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { SortedSitesPipe } from './pipes/sorted-sites.pipe';
+import {NzSelectModule} from 'ng-zorro-antd/select';
 
 
 @NgModule({
@@ -35,22 +36,23 @@ import { SortedSitesPipe } from './pipes/sorted-sites.pipe';
     SiteComponent,
     SortedSitesPipe
   ],
-  imports: [
-    CommonModule,
-    DashboardRoutingModule,
-    NzLayoutModule,
-    NzMenuModule,
-    NzButtonModule,
-    FontAwesomeModule,
-    NzModalModule,
-    NzInputModule,
-    FormsModule,
-    NzDropDownModule,
-    NzUploadModule,
-    NzPopconfirmModule,
-    NzToolTipModule,
-    DragDropModule,
-  ]
+    imports: [
+        CommonModule,
+        DashboardRoutingModule,
+        NzLayoutModule,
+        NzMenuModule,
+        NzButtonModule,
+        FontAwesomeModule,
+        NzModalModule,
+        NzInputModule,
+        FormsModule,
+        NzDropDownModule,
+        NzUploadModule,
+        NzPopconfirmModule,
+        NzToolTipModule,
+        DragDropModule,
+        NzSelectModule,
+    ]
 })
 export class DashboardModule {
 }

@@ -27,6 +27,15 @@
 
     </div>
 
+    <div *ngIf="site.id !== 0" class="w-100 mb-3">
+
+      <div>Folder:</div>
+
+      <nz-select [(ngModel)]="site.folderId" [nzOptions]="foldersQuery.folderOptions$ | async"
+                 style="min-width: 50%"></nz-select>
+
+    </div>
+
     <div class="w-100">
 
       Upload Icon:
