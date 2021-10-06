@@ -24,7 +24,7 @@ export class CreateEditSiteModalComponent implements OnInit, OnDestroy {
 
   constructor(
     private foldersService: FoldersService,
-    private foldersQuery: FoldersQuery,
+    public foldersQuery: FoldersQuery,
   ) { }
 
   ngOnInit(): void {

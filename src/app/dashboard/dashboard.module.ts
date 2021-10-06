@@ -23,6 +23,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { SortedSitesPipe } from './pipes/sorted-sites.pipe';
 import {NzSelectModule} from 'ng-zorro-antd/select';
+import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import {NzSelectModule} from 'ng-zorro-antd/select';
         NzToolTipModule,
         DragDropModule,
         NzSelectModule,
+        NzCheckboxModule,
     ]
 })
 export class DashboardModule {

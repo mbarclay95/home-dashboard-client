@@ -27,12 +27,24 @@
 
     </div>
 
-    <div *ngIf="site.id !== 0" class="w-100 mb-3">
+    <div *ngIf="site.id !== 0" class="w-100 mb-3 d-flex">
 
-      <div>Folder:</div>
+      <div class="w-50">
 
-      <nz-select [(ngModel)]="site.folderId" [nzOptions]="foldersQuery.folderOptions$ | async"
-                 style="min-width: 50%"></nz-select>
+        <div>Folder:</div>
+
+        <nz-select [(ngModel)]="site.folderId" [nzOptions]="foldersQuery.folderOptions$ | async"
+                   style="min-width: 99%"></nz-select>
+
+      </div>
+
+      <div class="w-50 d-flex justify-content-center align-items-end">
+
+        Show:
+
+        <label nz-checkbox [(ngModel)]="site.show" class="ms-2"></label>
+
+      </div>
 
     </div>
 
