@@ -6,6 +6,7 @@ import {FoldersService} from '../../../../services/folders/state/folders.service
 import {environment} from '../../../../../environments/environment';
 import {faCheckCircle} from '@fortawesome/free-solid-svg-icons';
 import {FoldersQuery} from '../../../../services/folders/state/folders.query';
+import {createSiteImage} from '../../../../models/site-image.model';
 
 @Component({
   selector: 'app-create-edit-site-modal',
@@ -15,6 +16,7 @@ import {FoldersQuery} from '../../../../services/folders/state/folders.query';
 export class CreateEditSiteModalComponent implements OnInit, OnDestroy {
   @Input() openModal: Observable<Site>;
 
+  fileList: [] = [];
   site: Site;
   isVisible = false;
   check = faCheckCircle;
@@ -49,6 +51,11 @@ export class CreateEditSiteModalComponent implements OnInit, OnDestroy {
       await this.foldersService.updateSite(this.site, this.folderId);
     }
 
+    this.closeModal();
+  }
+
+  closeModal(): void {
+    this.fileList = [];
     this.isVisible = false;
   }
 
@@ -60,9 +67,7 @@ export class CreateEditSiteModalComponent implements OnInit, OnDestroy {
     const status = file.status;
 
     if (status === 'done') {
-      this.site.s3Path = file.response.imagePath;
-
+      this.site.siteImage = createSiteImage(file.response);
     }
   }
-
 }

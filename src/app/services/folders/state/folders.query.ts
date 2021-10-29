@@ -13,24 +13,22 @@ export class FoldersQuery extends QueryEntity<FoldersState> {
   gridFormattedFolders$: Observable<Folder[][]> = this.folders$.pipe(
       map(o => {
         const filterAndSorted = o.filter(f => f.show).sort((a, b) => a.sort - b.sort);
-        const gridFormattedFolders: Folder[][] = [];
-        let temp: Folder[] = [];
-        let counter = 0;
+        const formattedFolders: {column1: Folder[], column2: Folder[], column3: Folder[]} = {
+            column1: [],
+            column2: [],
+            column3: [],
+        };
 
-        for (const folder of filterAndSorted) {
-          counter++;
-          if (counter > 3) {
-            counter = 0;
-            gridFormattedFolders.push(temp);
-            temp = [];
-          }
-          temp.push(folder);
-        }
-        if (temp.length > 0) {
-          gridFormattedFolders.push(temp);
-        }
+        let counter: 1 | 2 | 3 = 1;
+        filterAndSorted.forEach(folder => {
+            formattedFolders['column' + counter].push(folder);
+            counter++;
+            if (counter > 3) {
+                counter = 1;
+            }
+        });
 
-        return gridFormattedFolders;
+        return [formattedFolders.column1, formattedFolders.column2, formattedFolders.column3];
       })
   );
 

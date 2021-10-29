@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {faEdit} from '@fortawesome/free-solid-svg-icons';
+import {FoldersQuery} from '../../../services/folders/state/folders.query';
+import {FoldersService} from '../../../services/folders/state/folders.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  constructor() { }
+  edit = faEdit;
+
+  constructor(
+    public foldersQuery: FoldersQuery,
+    public foldersService: FoldersService
+  ) { }
 
   ngOnInit(): void {
   }

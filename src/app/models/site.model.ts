@@ -1,3 +1,5 @@
+import {createSiteImage, SiteImage} from './site-image.model';
+
 export interface Site {
   id: number;
   createdAt: Date;
@@ -7,9 +9,8 @@ export interface Site {
   show: boolean;
   sort: number;
   url: string;
-  imagePath: string;
-  s3Path: string;
   folderId: number;
+  siteImage: SiteImage;
 }
 
 export function createSite(params: Partial<Site>): Site {
@@ -20,10 +21,9 @@ export function createSite(params: Partial<Site>): Site {
     name: params.name ?? null,
     description: params.description ?? null,
     url: params.url ?? null,
-    imagePath: params.imagePath ?? null,
-    s3Path: params.s3Path ?? null,
     sort: isNaN(params.sort) ? null : Number(params.sort),
     folderId: isNaN(params.folderId) ? null : Number(params.folderId),
     show: !!params.show,
+    siteImage: params.siteImage ? createSiteImage(params.siteImage) : null
   } as Site;
 }

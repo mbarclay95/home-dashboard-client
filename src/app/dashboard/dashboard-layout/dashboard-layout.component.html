@@ -1,24 +1,5 @@
 <nz-layout>
 
-  <nz-header class="d-flex justify-content-between align-items-center">
-
-    <ul nz-menu nzTheme="dark" nzMode="horizontal">
-
-      <li nz-menu-item routerLink="/dashboard" nzMatchRouter>Dashboard</li>
-
-      <li nz-menu-item>Settings</li>
-
-    </ul>
-
-    <button nz-button [nzType]="(foldersQuery.editMode$ | async) ? 'primary' : 'text'"
-            (click)="foldersService.toggleEditMode()">
-
-      <fa-icon [icon]="edit"></fa-icon>
-
-    </button>
-
-  </nz-header>
-
   <nz-content>
 
     <div class="inner-content">

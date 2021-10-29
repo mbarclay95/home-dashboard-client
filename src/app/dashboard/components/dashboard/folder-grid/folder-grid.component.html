@@ -1,4 +1,3 @@
-
 <div class="d-flex justify-content-end w-100 px-2" *ngIf="foldersQuery.editMode$ | async">
 
   <button nz-button nzType="primary" (click)="createFolder()">
@@ -11,18 +10,15 @@
 
 </div>
 
-<div class="mt-2 w-100">
+<div class="mt-2 w-100 d-flex responsive-layout">
 
-  <div class="d-flex flex-column w-100" *ngFor="let folderRow of foldersQuery.gridFormattedFolders$ | async">
+  <div *ngFor="let folderColumn of foldersQuery.gridFormattedFolders$ | async"
+       class="d-flex flex-column responsive-width">
 
-    <div class="d-flex w-100 responsive-layout">
+    <div class="w-100" *ngFor="let folder of folderColumn">
 
-      <div class="responsive-width" *ngFor="let folder of folderRow">
-
-        <app-folder (openFolderModal)="openFolderModal.next($event)" (openSiteModal)="openSiteModal.next($event)"
-                    [folder]="folder" [editMode]="foldersQuery.editMode$ | async"></app-folder>
-
-      </div>
+      <app-folder (openFolderModal)="openFolderModal.next($event)" (openSiteModal)="openSiteModal.next($event)"
+                  [folder]="folder" [editMode]="foldersQuery.editMode$ | async"></app-folder>
 
     </div>
 

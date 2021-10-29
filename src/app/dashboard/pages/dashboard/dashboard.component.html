@@ -1,8 +1,16 @@
-
 <div class="d-flex flex-column w-100">
 
   <app-folder-grid></app-folder-grid>
 
 </div>
 
+<div style="position: absolute; right: 24px; bottom: 88px">
 
+  <button nz-button nzShape="circle" nzSize="large" [nzType]="(foldersQuery.editMode$ | async) ? 'primary' : 'text'"
+          (click)="foldersService.toggleEditMode()">
+
+    <fa-icon [icon]="edit"></fa-icon>
+
+  </button>
+
+</div>

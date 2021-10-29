@@ -1,5 +1,5 @@
 <nz-modal [(nzVisible)]="isVisible" [nzTitle]="(site?.id === 0 ? 'Create' : 'Edit') + ' Site'" nzWidth="50vw"
-          (nzOnCancel)="isVisible = false" nzOkText="Save" nzCancelText="Close" (nzOnOk)="saveSite()">
+          (nzOnCancel)="closeModal()" nzOkText="Save" nzCancelText="Close" (nzOnOk)="saveSite()">
 
   <div *ngIf="site">
 
@@ -50,20 +50,27 @@
 
     <div class="w-100">
 
-      Upload Icon:
+      <div class="w-100 d-flex align-items-center mb-2">
 
-      <nz-upload *ngIf="!site.s3Path" class="w-100" nzType="drag" [nzMultiple]="false" [nzAction]="getUploadPath()"
-                 (nzChange)="handleChange($event)">
+        Upload Icon:
 
-        <p class="ant-upload-text">Click or drag file to this area to upload</p>
+        <img *ngIf="site.siteImage" [src]="site.siteImage.imagePath" class="ms-3" style="height: 40px;">
 
-      </nz-upload>
+      </div>
 
-      <fa-icon *ngIf="site.s3Path" [icon]="check" style="color: green"></fa-icon>
+      <div class="w-100 d-flex align-items-end">
+
+        <nz-upload class="w-100" nzType="drag" [nzMultiple]="false" [nzAction]="getUploadPath()"
+                   (nzChange)="handleChange($event)" nzFileType="image/png" nzAccept=".png" [(nzFileList)]="fileList">
+
+          <p class="ant-upload-text">Click or drag file to this area to upload (must be png)</p>
+
+        </nz-upload>
+
+      </div>
 
     </div>
 
   </div>
-
 
 </nz-modal>
